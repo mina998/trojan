@@ -2,5 +2,6 @@
 
 安装
 ```````
+wget -O https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh
 curl -O https://raw.githubusercontent.com/mina998/trojan/main/trojan.sh && chmod +x trojan.sh && sh trojan.sh
 ```````
