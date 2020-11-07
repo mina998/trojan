@@ -145,8 +145,8 @@ dpkg -i caddy_2.2.1_linux_amd64.deb && rm caddy_2.2.1_linux_amd64.deb
 # 网站模板
 host=https://freewebsitetemplates.com/download/
 echo ${Blue}
-w1=space-science
-echo "1.space science"
+w1=bootswebsitetemplate
+echo "1.boots"
 w2=lawfirm
 echo "2.lawfirm"
 w3=woodworkingwebsitetemplate
