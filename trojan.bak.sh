@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 Green="\033[32m"
 Blue="\033[36m"
 Red="\033[31m"
@@ -11,10 +11,6 @@ fi
 # 安装wget
 if [ ! -x /usr/bin/wget ] ; then 
 	apt install wget
-fi
-# 安装unzip
-if [ ! -x /usr/bin/unzip ] ; then 
-    apt install unzip
 fi
 # 安装并执行证书签发程序
 if [ ! -f /root/.acme.sh/acme.sh ] ; then 
@@ -142,42 +138,19 @@ wget https://github.com/caddyserver/caddy/releases/download/v2.2.1/caddy_2.2.1_l
 # 安装Caddy
 dpkg -i caddy_2.2.1_linux_amd64.deb && rm caddy_2.2.1_linux_amd64.deb
 
-# 网站模板
-host=https://freewebsitetemplates.com/download/
 echo ${Blue}
-w1=space-science
-echo "1.space science"
-w2=lawfirm
-echo "2.lawfirm"
-w3=woodworkingwebsitetemplate
-echo "3.woodworking"
-w4=herdesignswebtemplate
-echo "4.herdesigns"
-w5=yogawebsitetemplate
-echo "5.yoga"
-w6=eternalbeautyessentialswebtemplate
-echo "6.eternal beauty essentials"
-w7=gamewebsitetemplate
-echo "7.game"
-w8=gadgetshopwebsitetemplate
-echo "8.gadget shop"
-w9=photographywebsitetemplate
-echo "9.photography"
-w0=flowershoptemplate
-echo "0.flower shop"
-
-read -p "请输入ID(0-9):" id
-eval name='$'w$id
-link="${host}${name}.zip"
-#eval
-eval "wget $link"
+read -p "请输入伪装网站(https://www.qb5.tw):" web2
 echo ${Font}
-unzip $name.zip && rm $name.zip
-rm -rf /usr/share/caddy/
-mv $name /usr/share/caddy
 
 # 添加Caddy配置文件
-cd /etc/caddy/ && caddy stop && caddy start && cd ~
+cd /etc/caddy/ && cat > Caddyfile <<EOF
+:80
+reverse_proxy ${web2} {
+    header_up Host {http.reverse_proxy.upstream.hostport}
+}
+EOF
+# 重启Caddy
+caddy stop && caddy start && cd ~
 
 echo "${Green}查看状态${Font}: ${Blue}systemctl status trojan${Font}"
 echo "${Green}停　　止${Font}: ${Blue}systemctl stop trojan${Font}"
