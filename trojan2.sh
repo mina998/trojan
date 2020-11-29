@@ -84,7 +84,7 @@ cat > config.json <<EOF
             "h2": 81
         },
         "reuse_session": true,
-        "session_ticket": false,
+        "session_ticket": true,
         "session_timeout": 600,
         "plain_http_response": "",
         "curves": "",
@@ -132,3 +132,5 @@ echo "${Blue}服务器地址${Font}: ${Red}${domain}${Font}"
 echo "${Blue}端　　　口${Font}: ${Red}${port}${Font}"
 echo "${Blue}密　　　码${Font}: ${Red}${password}${Font}"
 echo "${Blue}传输层加密${Font}: ${Red}tls${Font}"
+
+echo "trojan://${password}@${domain}:${port}"
