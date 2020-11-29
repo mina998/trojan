@@ -57,7 +57,7 @@ echo "${Blue}安装trojan程序${Font}"
 # 下载trojan-gfw
 wget https://github.com/p4gefau1t/trojan-go/releases/download/v0.8.2/trojan-go-linux-amd64.zip
 # 解压缩
-unzip trojan-go-linux-amd64.zip -d ./trojan
+unzip trojan-go-linux-amd64.zip -d ./trojan && rm trojan-go-linux-amd64.zip && cd ./trojan
 
 echo $Blue
 read -p "请输入密码:" password
@@ -72,15 +72,21 @@ remote-port: 80
 password:
   - ${password}
 ssl:
-  cert: ../ssl/ca.crt
-  key: ../ssl/ca.key
+  cert: /root/ssl/ca.crt
+  key: /root/ssl/ca.key
   sni: ${domain}
+  session_ticket: true
+  fingerprint: chrome
+mux:
+  enabled: true
+  concurrency: 8
+  idle_timeout: 60
 router:
   enabled: true
   block:
     - 'geoip:private'
-  geoip: geoip.dat
-  geosite: geosite.dat
+  geoip: /root/trojan/geoip.dat
+  geosite: /root/trojan/geosite.dat
 EOF
 
 # 安装trojan服务
