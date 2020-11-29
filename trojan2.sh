@@ -45,7 +45,9 @@ mkdir ~/ssl
 
 echo "${Blue}证书安装中. 请稍等...${Font}"
 sleep 3
-#
+# 工具
+wget https://raw.githubusercontent.com/mina998/trojan/main/tools.sh
+
 echo "${Blue}安装trojan程序${Font}"
 
 # 下载trojan-gfw
@@ -134,3 +136,4 @@ echo "${Blue}密　　　码${Font}: ${Red}${password}${Font}"
 echo "${Blue}传输层加密${Font}: ${Red}tls${Font}"
 
 echo "trojan://${password}@${domain}:${port}"
+
